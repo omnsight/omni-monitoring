@@ -10,7 +10,7 @@ class HealthCheck(BaseModel):
     status: str
 
 
-@router.get("/health", response_model=HealthCheck)
+@router.get("/health", response_model=HealthCheck, operation_id="health_check")
 def health_check():
     ArangoDBClient().db.version()
     RedisClient().client.ping()

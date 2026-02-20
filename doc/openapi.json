@@ -11,7 +11,7 @@
           "health"
         ],
         "summary": "Health Check",
-        "operationId": "health_check_health_get",
+        "operationId": "health_check",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -32,7 +32,7 @@
           "Monitoring Sources"
         ],
         "summary": "Create Monitoring Source",
-        "operationId": "create_monitoring_source_monitoring_sources_post",
+        "operationId": "create_monitoring_source",
         "parameters": [
           {
             "name": "authorization",
@@ -89,7 +89,7 @@
           "Monitoring Sources"
         ],
         "summary": "Get Monitoring Sources By User",
-        "operationId": "get_monitoring_sources_by_user_monitoring_sources_get",
+        "operationId": "get_monitoring_sources_by_user",
         "parameters": [
           {
             "name": "limit",
@@ -128,7 +128,7 @@
                   "items": {
                     "$ref": "#/components/schemas/MonitoringSource"
                   },
-                  "title": "Response Get Monitoring Sources By User Monitoring Sources Get"
+                  "title": "Response Get Monitoring Sources By User"
                 }
               }
             }
@@ -152,7 +152,7 @@
           "Monitoring Sources"
         ],
         "summary": "Get Monitoring Source",
-        "operationId": "get_monitoring_source_monitoring_sources__id__get",
+        "operationId": "get_monitoring_source",
         "parameters": [
           {
             "name": "id",
@@ -208,7 +208,7 @@
           "Monitoring Sources"
         ],
         "summary": "Update Monitoring Source",
-        "operationId": "update_monitoring_source_monitoring_sources__id__put",
+        "operationId": "update_monitoring_source",
         "parameters": [
           {
             "name": "id",
@@ -274,7 +274,7 @@
           "Monitoring Sources"
         ],
         "summary": "Delete Monitoring Source",
-        "operationId": "delete_monitoring_source_monitoring_sources__id__delete",
+        "operationId": "delete_monitoring_source",
         "parameters": [
           {
             "name": "id",
@@ -325,7 +325,7 @@
           "Monitor Triggers"
         ],
         "summary": "Create Monitor Trigger",
-        "operationId": "create_monitor_trigger_monitor_triggers_post",
+        "operationId": "create_monitor_trigger",
         "parameters": [
           {
             "name": "authorization",
@@ -382,7 +382,7 @@
           "Monitor Triggers"
         ],
         "summary": "Get Monitor Trigger",
-        "operationId": "get_monitor_trigger_monitor_triggers_get",
+        "operationId": "get_monitor_trigger",
         "parameters": [
           {
             "name": "authorization",
@@ -429,7 +429,7 @@
           "Monitor Triggers"
         ],
         "summary": "Delete Monitor Trigger",
-        "operationId": "delete_monitor_trigger_monitor_triggers_delete",
+        "operationId": "delete_monitor_trigger",
         "parameters": [
           {
             "name": "authorization",

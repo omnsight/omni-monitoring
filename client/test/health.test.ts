@@ -14,7 +14,7 @@ describe('HealthService', () => {
   });
 
   it('should return a health check', async () => {
-    const healthCheck = await HealthService.healthCheckHealthGet();
+    const healthCheck = await HealthService.healthCheck();
     expect(healthCheck).toBeDefined();
     expect(healthCheck.status).toEqual('ok');
   });

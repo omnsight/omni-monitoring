@@ -13,7 +13,9 @@ logger = logging.getLogger(__name__)
 dal = MonitorTriggerDataAccessLayer()
 
 
-@monitor_trigger_router.post("/monitor-triggers", response_model=MonitorTrigger, tags=["Monitor Triggers"])
+@monitor_trigger_router.post(
+    "/monitor-triggers", response_model=MonitorTrigger, tags=["Monitor Triggers"], operation_id="create_monitor_trigger"
+)
 def create_monitor_trigger(trigger: MonitorTriggerMainData, user_ctx: Dict = Depends(get_user_context)):
     try:
         trigger = MonitorTrigger(
@@ -27,7 +29,9 @@ def create_monitor_trigger(trigger: MonitorTriggerMainData, user_ctx: Dict = Dep
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-@monitor_trigger_router.get("/monitor-triggers", response_model=MonitorTrigger, tags=["Monitor Triggers"])
+@monitor_trigger_router.get(
+    "/monitor-triggers", response_model=MonitorTrigger, tags=["Monitor Triggers"], operation_id="get_monitor_trigger"
+)
 def get_monitor_trigger(user_ctx: Dict = Depends(get_user_context)):
     try:
         trigger = dal.get_monitor_trigger(user_id=user_ctx["user_id"])
@@ -40,7 +44,9 @@ def get_monitor_trigger(user_ctx: Dict = Depends(get_user_context)):
     return trigger
 
 
-@monitor_trigger_router.delete("/monitor-triggers", status_code=204, tags=["Monitor Triggers"])
+@monitor_trigger_router.delete(
+    "/monitor-triggers", status_code=204, tags=["Monitor Triggers"], operation_id="delete_monitor_trigger"
+)
 def delete_monitor_trigger(user_ctx: Dict = Depends(get_user_context)):
     trigger = dal.get_monitor_trigger(user_id=user_ctx["user_id"])
 

@@ -14,7 +14,12 @@ logger = logging.getLogger(__name__)
 dal = MonitoringSourceDataAccessLayer()
 
 
-@monitoring_source_router.post("/monitoring-sources", response_model=MonitoringSource, tags=["Monitoring Sources"])
+@monitoring_source_router.post(
+    "/monitoring-sources",
+    response_model=MonitoringSource,
+    tags=["Monitoring Sources"],
+    operation_id="create_monitoring_source",
+)
 def create_monitoring_source(data: MonitoringSourceMainData, user_ctx: Dict = Depends(get_user_context)):
     try:
         return dal.create_monitoring_source(data, user_ctx["user_id"], user_ctx["roles"])
@@ -26,7 +31,12 @@ def create_monitoring_source(data: MonitoringSourceMainData, user_ctx: Dict = De
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-@monitoring_source_router.get("/monitoring-sources/{id:path}", response_model=MonitoringSource, tags=["Monitoring Sources"])
+@monitoring_source_router.get(
+    "/monitoring-sources/{id:path}",
+    response_model=MonitoringSource,
+    tags=["Monitoring Sources"],
+    operation_id="get_monitoring_source",
+)
 def get_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
     try:
         monitoring_source = dal.get_monitoring_source(id, user_ctx["user_id"])
@@ -43,7 +53,12 @@ def get_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
     return monitoring_source
 
 
-@monitoring_source_router.get("/monitoring-sources", response_model=List[MonitoringSource], tags=["Monitoring Sources"])
+@monitoring_source_router.get(
+    "/monitoring-sources",
+    response_model=List[MonitoringSource],
+    tags=["Monitoring Sources"],
+    operation_id="get_monitoring_sources_by_user",
+)
 def get_monitoring_sources_by_user(limit: int = 100, user_ctx: Dict = Depends(get_user_context)):
     try:
         return dal.get_monitoring_sources_by_user(user_ctx["user_id"], limit=limit)
@@ -52,7 +67,12 @@ def get_monitoring_sources_by_user(limit: int = 100, user_ctx: Dict = Depends(ge
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-@monitoring_source_router.put("/monitoring-sources/{id:path}", response_model=MonitoringSource, tags=["Monitoring Sources"])
+@monitoring_source_router.put(
+    "/monitoring-sources/{id:path}",
+    response_model=MonitoringSource,
+    tags=["Monitoring Sources"],
+    operation_id="update_monitoring_source",
+)
 def update_monitoring_source(id: str, data: MonitoringSourceMainData, user_ctx: Dict = Depends(get_user_context)):
     try:
         return dal.update_monitoring_source(id, data, user_ctx["user_id"], user_ctx["roles"])
@@ -65,7 +85,12 @@ def update_monitoring_source(id: str, data: MonitoringSourceMainData, user_ctx: 
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-@monitoring_source_router.delete("/monitoring-sources/{id:path}", status_code=204, tags=["Monitoring Sources"])
+@monitoring_source_router.delete(
+    "/monitoring-sources/{id:path}",
+    status_code=204,
+    tags=["Monitoring Sources"],
+    operation_id="delete_monitoring_source",
+)
 def delete_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
     try:
         dal.delete_monitoring_source(id, user_ctx["user_id"])

@@ -15,7 +15,7 @@ export class MonitorTriggersService {
      * @returns MonitorTrigger Successful Response
      * @throws ApiError
      */
-    public static createMonitorTriggerMonitorTriggersPost(
+    public static createMonitorTrigger(
         requestBody: MonitorTriggerMainData,
         authorization?: (string | null),
     ): CancelablePromise<MonitorTrigger> {
@@ -38,7 +38,7 @@ export class MonitorTriggersService {
      * @returns MonitorTrigger Successful Response
      * @throws ApiError
      */
-    public static getMonitorTriggerMonitorTriggersGet(
+    public static getMonitorTrigger(
         authorization?: (string | null),
     ): CancelablePromise<MonitorTrigger> {
         return __request(OpenAPI, {
@@ -58,7 +58,7 @@ export class MonitorTriggersService {
      * @returns void
      * @throws ApiError
      */
-    public static deleteMonitorTriggerMonitorTriggersDelete(
+    public static deleteMonitorTrigger(
         authorization?: (string | null),
     ): CancelablePromise<void> {
         return __request(OpenAPI, {

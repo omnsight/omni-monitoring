@@ -9,8 +9,7 @@
   ],
   "scripts": {
     "generate": "openapi --input ../doc/openapi.json --output ./src --client axios",
-    "test": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest",
-    "pretest": "npm run build",
+    "test": "npm run build && NODE_TLS_REJECT_UNAUTHORIZED=0 jest",
     "prepare": "npm run build",
     "build": "tsc -p tsconfig.build.json"
   },
