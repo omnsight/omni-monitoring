@@ -15,7 +15,7 @@ export class MonitoringSourcesService {
      * @returns MonitoringSource Successful Response
      * @throws ApiError
      */
-    public static createMonitoringSourceMonitoringSourcesPost(
+    public static createMonitoringSource(
         requestBody: MonitoringSourceMainData,
         authorization?: (string | null),
     ): CancelablePromise<MonitoringSource> {
@@ -39,7 +39,7 @@ export class MonitoringSourcesService {
      * @returns MonitoringSource Successful Response
      * @throws ApiError
      */
-    public static getMonitoringSourcesByUserMonitoringSourcesGet(
+    public static getMonitoringSourcesByUser(
         limit: number = 100,
         authorization?: (string | null),
     ): CancelablePromise<Array<MonitoringSource>> {
@@ -64,7 +64,7 @@ export class MonitoringSourcesService {
      * @returns MonitoringSource Successful Response
      * @throws ApiError
      */
-    public static getMonitoringSourceMonitoringSourcesIdGet(
+    public static getMonitoringSource(
         id: string,
         authorization?: (string | null),
     ): CancelablePromise<MonitoringSource> {
@@ -90,7 +90,7 @@ export class MonitoringSourcesService {
      * @returns MonitoringSource Successful Response
      * @throws ApiError
      */
-    public static updateMonitoringSourceMonitoringSourcesIdPut(
+    public static updateMonitoringSource(
         id: string,
         requestBody: MonitoringSourceMainData,
         authorization?: (string | null),
@@ -118,7 +118,7 @@ export class MonitoringSourcesService {
      * @returns void
      * @throws ApiError
      */
-    public static deleteMonitoringSourceMonitoringSourcesIdDelete(
+    public static deleteMonitoringSource(
         id: string,
         authorization?: (string | null),
     ): CancelablePromise<void> {

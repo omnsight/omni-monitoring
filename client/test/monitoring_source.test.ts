@@ -15,7 +15,7 @@ describe('MonitoringSourcesService', () => {
 
   it('should create, get, update, and delete a monitoring source', async () => {
     // Create
-    const createdSource = await MonitoringSourcesService.createMonitoringSourceMonitoringSourcesPost({
+    const createdSource = await MonitoringSourcesService.createMonitoringSource({
       name: 'Test Source',
       type: SourceType.WEBSITE,
       url: 'https://example.com',
@@ -25,26 +25,26 @@ describe('MonitoringSourcesService', () => {
     const sourceId = createdSource._id!;
 
     // Get
-    const fetchedSource = await MonitoringSourcesService.getMonitoringSourceMonitoringSourcesIdGet(sourceId);
+    const fetchedSource = await MonitoringSourcesService.getMonitoringSource(sourceId);
     expect(fetchedSource).toBeDefined();
     expect(fetchedSource.name).toEqual('Test Source');
 
     // Get all by user
-    const sources = await MonitoringSourcesService.getMonitoringSourcesByUserMonitoringSourcesGet();
+    const sources = await MonitoringSourcesService.getMonitoringSourcesByUser();
     expect(sources).toBeDefined();
     expect(sources.length).toBeGreaterThan(0);
 
     // Update
-    const updatedSource = await MonitoringSourcesService.updateMonitoringSourceMonitoringSourcesIdPut(sourceId, {
+    const updatedSource = await MonitoringSourcesService.updateMonitoringSource(sourceId, {
       name: 'Updated Test Source',
     });
     expect(updatedSource).toBeDefined();
     expect(updatedSource.name).toEqual('Updated Test Source');
 
     // Delete
-    await MonitoringSourcesService.deleteMonitoringSourceMonitoringSourcesIdDelete(sourceId);
+    await MonitoringSourcesService.deleteMonitoringSource(sourceId);
 
     // Verify deletion
-    await expect(MonitoringSourcesService.getMonitoringSourceMonitoringSourcesIdGet(sourceId)).rejects.toThrow();
+    await expect(MonitoringSourcesService.getMonitoringSource(sourceId)).rejects.toThrow();
   });
 });

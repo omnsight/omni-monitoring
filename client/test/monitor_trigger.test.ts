@@ -14,21 +14,21 @@ describe('MonitorTriggersService', () => {
   });
 
   it('should create, get and delete a monitor trigger', async () => {
-    const createdTrigger = await MonitorTriggersService.createMonitorTriggerMonitorTriggersPost({
+    const createdTrigger = await MonitorTriggersService.createMonitorTrigger({
       language: 'en',
     });
     expect(createdTrigger).toBeDefined();
     expect(createdTrigger.language).toEqual('en');
 
     // Get
-    const fetchedTrigger = await MonitorTriggersService.getMonitorTriggerMonitorTriggersGet();
+    const fetchedTrigger = await MonitorTriggersService.getMonitorTrigger();
     expect(fetchedTrigger).toBeDefined();
     expect(fetchedTrigger.language).toEqual('en');
 
     // Delete
-    await MonitorTriggersService.deleteMonitorTriggerMonitorTriggersDelete();
+    await MonitorTriggersService.deleteMonitorTrigger();
     
     // Verify deletion by trying to get it again, expecting a 404
-    await expect(MonitorTriggersService.getMonitorTriggerMonitorTriggersGet()).rejects.toThrow();
+    await expect(MonitorTriggersService.getMonitorTrigger()).rejects.toThrow();
   });
 });

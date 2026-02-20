@@ -1,5 +1,6 @@
-import jwt
 from unittest.mock import patch
+
+import jwt
 from fastapi.testclient import TestClient
 from omni_python_library import init_omni_library
 from omni_python_library.utils.user import UserRole
@@ -27,7 +28,7 @@ class TestMonitoringSource:
         cls.no_roles_client.headers = {"Authorization": f"Bearer {no_roles_token}"}
 
     def teardown_method(self, method):
-        # This method is called after each test. 
+        # This method is called after each test.
         # It's a good place to clean up resources created during the test.
         response = self.client.get("/monitoring-sources")
         for item in response.json():
