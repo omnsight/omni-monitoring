@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omni-monitoring"
+version = "0.1.0"
+description = "Omni Monitoring Service"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "uvicorn>=0.22.0",
+    "pydantic>=2.0.0",
+    "fastapi>=0.100.0",
+    "omni-python-library @ git+https://github.com/omnsight/omni-python-library",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=25.11.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-asyncio",
+    "pytest-mock>=3.10.0",
+    "pyjwt>=2.8.0",
+    "poethepoet>=0.27.0",
+]
+
+[tool.black]
+line-length = 120
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+line_length = 120
+known_first_party = ["omni_monitoring"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.coverage.run]
+source = ["src/omni_monitoring"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=src/omni_monitoring --cov-branch --cov-report=xml"
+
+[tool.poe.tasks]
+clean = "scripts/cleanup.sh"
