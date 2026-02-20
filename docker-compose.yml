@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    container_name: omni-monitoring-app
+    container_name: omni-monitoring
     env_file:
       - .env
     environment:
