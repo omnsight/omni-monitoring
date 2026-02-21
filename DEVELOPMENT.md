@@ -1,4 +1,4 @@
-## Manage with uv
+## 📦 Installation Guide
 
 This project is managed with [uv](https://github.com/astral-sh/uv).
 
@@ -13,26 +13,12 @@ Clean up:
 uv run poe clean
 ```
 
-Run unit tests:
-```bash
-# loading .env is necessary for local testing
-docker compose up -d --wait
-export $(cat .env | xargs) && uv run pytest
-docker compose down
-```
-
-Format the code using black:
-```bash
-uv run black .
-uv run isort .
-```
+## 🚀 Run Service Locally & Debug
 
 Run the application:
 ```bash
 uv run uvicorn omni_monitoring.main:app --reload
 ```
-
-## Run Service Locally & Debug
 
 Run service:
 ```bash
@@ -44,14 +30,31 @@ docker inspect <container name>
 docker logs <container name>
 ```
 
-## Export OpenAPI Definition
+## ✅ Running Unit Tests
+
+```bash
+# loading .env is necessary for local testing
+docker compose up -d --wait
+export $(cat .env | xargs) && uv run pytest
+docker compose down
+```
+
+## 💅 Formatting Code
+
+Format the code using black:
+```bash
+uv run black .
+uv run isort .
+```
+
+## 📄 Export OpenAPI Definition
 
 Export the OpenAPI definition to `doc/openapi.json`:
 ```bash
 uv run python scripts/export_openapi.py
 ```
 
-## Setup Client
+## 셋업 Setup Client
 
 Located in `client/` directory.
 
@@ -65,12 +68,14 @@ Generate client:
 npm run generate
 ```
 
-## Client Development
+## 👨‍💻 Client Development
 
-Run unit tests: 
+Run unit tests:
 ```bash
 docker compose up -d --wait
-cd client && npm run pretest && npm run test && cd ..
+cd client
+npm run test
+cd ..
 docker compose down
 ```
 
