@@ -1,45 +1,134 @@
-# Omni Sentinel
+# Omni Monitoring
 [![codecov](https://codecov.io/github/omnsight/omni-monitoring/graph/badge.svg?token=2LDW67VWXE)](https://codecov.io/github/omnsight/omni-monitoring)
 
-## Overview
+Omni Monitoring is a service for monitoring data sources and triggering actions based on the data.
 
-Omni Sentinel is a robust monitoring service designed to track and manage various information sources. It provides a flexible API to create, configure, and manage monitoring sources and set up triggers based on specific conditions.
+### 🚀 Features
 
-The backend is built with Python using the FastAPI framework, leveraging ArangoDB for data persistence and Redis for caching. A TypeScript client is also provided for easy integration with frontend applications.
+- **Monitoring Sources**: Create, read, and manage monitoring sources.
+- **Monitor Triggers**: Set up triggers to act on monitoring data.
+- **Health Checks**: API endpoint for health checks.
+- **OpenAPI Support**: Automatically generated OpenAPI documentation.
 
-## Usage
+### 🛠 Tech Stack
 
-### API Call Using Typescript Client
+- **Backend**: Python, FastAPI, Pydantic
+- **Database**: ArangoDB, Redis
+- **Client**: TypeScript, Jest
+- **DevOps**: Docker, GitHub Actions
 
-To use this client in your project, add the following to your `package.json`:
+## 📦 Getting Started
+
+### Prerequisites
+
+- Python 3.11+
+- Docker
+- `uv`
+
+### Installation
+
+Clone the repo:
+
+```bash
+git clone https://github.com/omnsight/omni-monitoring.git
+cd omni-monitoring
+```
+
+Install dependencies:
+
+```bash
+uv lock --upgrade
+uv sync --extra dev
+```
+
+Install client dependencies:
+
+```bash
+cd client
+npm install
+cd ..
+```
+
+## ⚙️ Configuration
+
+Fill the `.env` file:
+
+```bash
+stage="local"
+
+# ArangoDB
+ARANGODB_HOST="http://localhost:8529"
+ARANGODB_USERNAME="root"
+ARANGODB_PASSWORD="password"
+ARANGODB_DB_NAME="test_osint_db"
+ARANGODB_EMBEDDING_DIMENSION="384"
+
+# Redis
+REDIS_HOST="localhost"
+REDIS_PORT="6379"
+REDIS_PASSWORD=""
+
+# Embedding Model
+EMBEDDING_AI_API_KEY=
+EMBEDDING_AI_API_BASE_URL=
+EMBEDDING_MODEL=
+```
+
+## 📖 Usage
+
+### Running the Service
+
+Start the backend services:
+
+```bash
+docker-compose up -d --build --wait
+```
+
+Stop the backend services when you're done:
+
+```bash
+docker-compose down
+```
+
+### Using the Client
+
+To use the client in your Node.js project, you can install it directly from GitHub. Add the following to your `package.json`:
 
 ```json
 {
   "dependencies": {
-    "omni-monitoring-client": "github.com/omnsight/omni-monitoring#main"
+    "omni-monitoring": "github:omnsight/omni-monitoring"
   }
 }
 ```
 
-Here is a sample code snippet demonstrating how to use the client to invoke API calls.
+After installation, you can use the client in your application as shown below:
 
 ```typescript
-import { HealthService, OpenAPI } from 'omni-monitoring-client';
+import { OpenAPI, HealthService, HealthCheck } from 'omni-monitoring/client'; // Adjust path if needed
+
+// Configure the API client
+OpenAPI.BASE = 'http://localhost:8000'; // Adjust if your server runs on a different host/port
+// Configure authentication (e.g., with a bearer token)
+OpenAPI.TOKEN = 'your-bearer-token';
 
 async function main() {
-  // Configure the base URL and a static token
-  OpenAPI.BASE = 'http://localhost:8000';
-  OpenAPI.TOKEN = 'your-static-jwt-token-here';
-
   try {
-    const health = await HealthService.healthCheckHealthGet();
-    console.log('Health check result:', health);
+    console.log('Performing health check...');
+    const healthStatus: HealthCheck = await HealthService.healthCheck();
+    console.log('Health Check Status:', healthStatus);
   } catch (error) {
-    console.error('Error fetching health check:', error);
+    console.error('Error during health check:', error);
   }
 }
+
+main();
 ```
 
 ## Local Development
 
 Refer to [DEVELOPMENT.md](DEVELOPMENT.md) for local development setup.
+
+## 📄 License
+
+Distributed under the Apache-2.0 License. See [LICENSE](./LICENSE) for more information.

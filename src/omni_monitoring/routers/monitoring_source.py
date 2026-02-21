@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from omni_python_library.dal.monitoring_source_data_access_layer import MonitoringSourceDataAccessLayer
 from omni_python_library.middleware.user_token import get_user_context
 from omni_python_library.models import MonitoringSource, MonitoringSourceMainData
-from omni_python_library.utils import NotFoundError, PermissionDeniedError
+from omni_python_library.utils.errors import NotFoundError, PermissionDeniedError
 
 monitoring_source_router = APIRouter()
 logger = logging.getLogger(__name__)
