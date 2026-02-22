@@ -21,7 +21,7 @@ Omni Monitoring is a service for monitoring data sources and triggering actions 
 
 ### Prerequisites
 
-- Python 3.11+
+- Python 3.10+
 - Docker
 - `uv`
 
