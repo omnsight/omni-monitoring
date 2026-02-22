@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10"
 
 [[package]]
@@ -725,7 +725,7 @@ provides-extras = ["dev"]
 [[package]]
 name = "omni-python-library"
 version = "0.1.0"
-source = { git = "https://github.com/omnsight/omni-python-library#9e3351b706884b99e8090ebf0e5fc136481993e2" }
+source = { git = "https://github.com/omnsight/omni-python-library#90306e71c1891895cdb492961768eca8f93e6e9b" }
 dependencies = [
     { name = "cachetools" },
     { name = "fastapi" },
