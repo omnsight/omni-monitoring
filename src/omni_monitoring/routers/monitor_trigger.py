@@ -2,8 +2,8 @@ import logging
 from typing import Dict
 
 from fastapi import APIRouter, Depends, HTTPException
-from omni_python_library.dal.monitor_trigger_data_access_layer import MonitorTriggerDataAccessLayer
-from omni_python_library.middleware.user_token import get_user_context
+from omni_python_library.dal import MonitorTriggerDataAccessLayer
+from omni_python_library.middleware import get_user_context
 from omni_python_library.models import MonitorTrigger, MonitorTriggerMainData
 
 monitor_trigger_router = APIRouter()
