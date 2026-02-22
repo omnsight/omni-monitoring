@@ -12,16 +12,16 @@ Omni Monitoring is a service for monitoring data sources and triggering actions 
 
 ### 🛠 Tech Stack
 
-- **Backend**: Python, FastAPI, Pydantic
-- **Database**: ArangoDB, Redis
-- **Client**: TypeScript, Jest
-- **DevOps**: Docker, GitHub Actions
+- **Backend:** Python, FastAPI
+- **Database:** ArangoDB, Redis
+- **Frontend:** TypeScript
+- **Tooling:** uv, Docker, Pydantic
 
 ## 📦 Getting Started
 
 ### Prerequisites
 
-- Python 3.11+
+- Python 3.10+
 - Docker
 - `uv`
 
@@ -51,28 +51,7 @@ cd ..
 
 ## ⚙️ Configuration
 
-Fill the `.env` file:
-
-```bash
-stage="local"
-
-# ArangoDB
-ARANGODB_HOST="http://localhost:8529"
-ARANGODB_USERNAME="root"
-ARANGODB_PASSWORD="password"
-ARANGODB_DB_NAME="test_osint_db"
-ARANGODB_EMBEDDING_DIMENSION="384"
-
-# Redis
-REDIS_HOST="localhost"
-REDIS_PORT="6379"
-REDIS_PASSWORD=""
-
-# Embedding Model
-EMBEDDING_AI_API_KEY=
-EMBEDDING_AI_API_BASE_URL=
-EMBEDDING_MODEL=
-```
+Update configurations in [`.env`](.env)
 
 ## 📖 Usage
 

@@ -25,7 +25,10 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           pip install uv
+          uv lock --upgrade
           uv sync --extra dev
+          uv run black .
+          uv run isort .
 
       - name: 🧪 Run python tests and generate coverage report
         env:
@@ -46,7 +49,9 @@ jobs:
           node-version: '20'
 
       - name: 📦 Install client dependencies
-        run: npm install
+        run: |
+          npm install
+          npm run generate
         working-directory: ./client
 
       - name: 🧪 Run client tests
