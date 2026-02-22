@@ -59,9 +59,9 @@ def get_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
     tags=["Monitoring Sources"],
     operation_id="get_monitoring_sources_by_user",
 )
-def get_monitoring_sources_by_user(limit: int = 100, user_ctx: Dict = Depends(get_user_context)):
+def get_monitoring_sources_by_user(limit: int = 100, offset: int = 0, user_ctx: Dict = Depends(get_user_context)):
     try:
-        return dal.get_monitoring_sources_by_user(user_ctx["user_id"], limit=limit)
+        return dal.get_monitoring_sources_by_user(user_ctx["user_id"], limit=limit, offset=offset)
     except Exception:
         logger.exception(f"User {user_ctx['user_id']} failed to get monitoring sources")
         raise HTTPException(status_code=500, detail="Internal Server Error")
