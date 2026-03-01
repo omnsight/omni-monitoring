@@ -71,6 +71,8 @@ docker-compose down
 
 ### Using the Client
 
+Refer to [client/README.md](client/README.md) for [client](https://www.npmjs.com/package/omni-monitoring-client) setup and usage.
+
 ## Local Development
 
 Refer to [DEVELOPMENT.md](DEVELOPMENT.md) for local development setup.
