@@ -35,12 +35,14 @@ export class MonitoringSourcesService {
     /**
      * Get Monitoring Sources By User
      * @param limit
+     * @param offset
      * @param authorization
      * @returns MonitoringSource Successful Response
      * @throws ApiError
      */
     public static getMonitoringSourcesByUser(
         limit: number = 100,
+        offset?: number,
         authorization?: (string | null),
     ): CancelablePromise<Array<MonitoringSource>> {
         return __request(OpenAPI, {
@@ -51,6 +53,7 @@ export class MonitoringSourcesService {
             },
             query: {
                 'limit': limit,
+                'offset': offset,
             },
             errors: {
                 422: `Validation Error`,

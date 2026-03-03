@@ -3,6 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export type HealthCheck = {
+    /**
+     * The health status of the service.
+     */
     status: string;
 };
 
