@@ -5,7 +5,7 @@
     "version": "0.1.0"
   },
   "paths": {
-    "/health": {
+    "/health/monitoring": {
       "get": {
         "tags": [
           "health"
@@ -99,6 +99,16 @@
               "type": "integer",
               "default": 100,
               "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "title": "Offset"
             }
           },
           {
@@ -485,7 +495,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "title": "Status"
+            "title": "Status",
+            "description": "The health status of the service."
           }
         },
         "type": "object",
@@ -651,6 +662,30 @@
             ],
             "title": "Rev",
             "description": "ArangoDB document revision"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At",
+            "description": "Data creation timestamp"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At",
+            "description": "Data update timestamp"
           },
           "owner": {
             "type": "string",

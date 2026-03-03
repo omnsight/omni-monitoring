@@ -45,6 +45,14 @@ export type MonitoringSource = {
      */
     _rev?: (string | null);
     /**
+     * Data creation timestamp
+     */
+    created_at?: (number | null);
+    /**
+     * Data update timestamp
+     */
+    updated_at?: (number | null);
+    /**
      * Identify the user the monitoring source belongs to
      */
     owner: string;
