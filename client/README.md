@@ -1,6 +1,6 @@
 # Omni Monitoring Client
 
-This directory contains the generated TypeScript client for the API.
+This directory contains the generated [TypeScript client](https://www.npmjs.com/package/omni-monitoring-client) for the Omni Monitoring API.
 
 ## Usage
 
