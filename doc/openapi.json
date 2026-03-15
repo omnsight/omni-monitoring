@@ -156,13 +156,13 @@
         }
       }
     },
-    "/monitoring-sources/{id}": {
+    "/monitoring-sources/{id}/views": {
       "get": {
         "tags": [
           "Monitoring Sources"
         ],
         "summary": "Get Monitoring Source Views",
-        "operationId": "get_monitoring_source",
+        "operationId": "get_monitoring_source_views",
         "parameters": [
           {
             "name": "id",
@@ -200,7 +200,65 @@
                   "items": {
                     "$ref": "#/components/schemas/OsintView"
                   },
-                  "title": "Response Get Monitoring Source"
+                  "title": "Response Get Monitoring Source Views"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/monitoring-sources/{id}": {
+      "get": {
+        "tags": [
+          "Monitoring Sources"
+        ],
+        "summary": "Get Monitoring Source",
+        "operationId": "get_monitoring_source",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonitoringSource"
                 }
               }
             }

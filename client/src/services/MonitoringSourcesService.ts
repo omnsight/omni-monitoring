@@ -68,10 +68,35 @@ export class MonitoringSourcesService {
      * @returns OsintView Successful Response
      * @throws ApiError
      */
-    public static getMonitoringSource(
+    public static getMonitoringSourceViews(
         id: string,
         authorization?: (string | null),
     ): CancelablePromise<Array<OsintView>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/monitoring-sources/{id}/views',
+            path: {
+                'id': id,
+            },
+            headers: {
+                'authorization': authorization,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+    /**
+     * Get Monitoring Source
+     * @param id
+     * @param authorization
+     * @returns MonitoringSource Successful Response
+     * @throws ApiError
+     */
+    public static getMonitoringSource(
+        id: string,
+        authorization?: (string | null),
+    ): CancelablePromise<MonitoringSource> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/monitoring-sources/{id}',

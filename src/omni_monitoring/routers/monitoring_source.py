@@ -32,6 +32,21 @@ def create_monitoring_source(data: MonitoringSourceMainData, user_ctx: Dict = De
 
 
 @monitoring_source_router.get(
+    "/monitoring-sources/{id:path}/views",
+    response_model=List[OsintView],
+    tags=["Monitoring Sources"],
+    operation_id="get_monitoring_source_views",
+)
+def get_monitoring_source_views(id: str, user_ctx: Dict = Depends(get_user_context)):
+    try:
+        views = dal.get_views(id, user_ctx["user_id"])
+        return views
+    except Exception:
+        logger.exception(f"User {user_ctx['user_id']} failed to get monitoring source {id}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+
+@monitoring_source_router.get(
     "/monitoring-sources/{id:path}",
     response_model=MonitoringSource,
     tags=["Monitoring Sources"],
@@ -51,25 +66,6 @@ def get_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
     if not monitoring_source:
         raise HTTPException(status_code=404, detail="Resource not found")
     return monitoring_source
-
-
-@monitoring_source_router.get(
-    "/monitoring-sources/{id:path}",
-    response_model=List[OsintView],
-    tags=["Monitoring Sources"],
-    operation_id="get_monitoring_source",
-)
-def get_monitoring_source_views(id: str, user_ctx: Dict = Depends(get_user_context)):
-    try:
-        views = dal.get_views(id, user_ctx["user_id"])
-        return views
-    except NotFoundError:
-        raise HTTPException(status_code=404, detail="Resource not found")
-    except PermissionDeniedError:
-        raise HTTPException(status_code=403, detail="Insufficient permissions to access this resource")
-    except Exception:
-        logger.exception(f"User {user_ctx['user_id']} failed to get monitoring source {id}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
 @monitoring_source_router.get(
