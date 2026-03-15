@@ -61,7 +61,8 @@ def get_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
 )
 def get_monitoring_source_views(id: str, user_ctx: Dict = Depends(get_user_context)):
     try:
-        monitoring_source = dal.get_views(id, user_ctx["user_id"])
+        views = dal.get_views(id, user_ctx["user_id"])
+        return views
     except NotFoundError:
         raise HTTPException(status_code=404, detail="Resource not found")
     except PermissionDeniedError:
@@ -69,10 +70,6 @@ def get_monitoring_source_views(id: str, user_ctx: Dict = Depends(get_user_conte
     except Exception:
         logger.exception(f"User {user_ctx['user_id']} failed to get monitoring source {id}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
-
-    if not monitoring_source:
-        raise HTTPException(status_code=404, detail="Resource not found")
-    return monitoring_source
 
 
 @monitoring_source_router.get(
