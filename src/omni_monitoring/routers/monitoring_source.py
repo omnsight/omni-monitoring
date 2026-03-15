@@ -4,7 +4,7 @@ from typing import Dict, List
 from fastapi import APIRouter, Depends, HTTPException
 from omni_python_library.dal import MonitoringSourceDataAccessLayer
 from omni_python_library.middleware import get_user_context
-from omni_python_library.models import MonitoringSource, MonitoringSourceMainData
+from omni_python_library.models import MonitoringSource, MonitoringSourceMainData, OsintView
 from omni_python_library.utils.errors import NotFoundError, PermissionDeniedError
 
 monitoring_source_router = APIRouter()
@@ -40,6 +40,28 @@ def create_monitoring_source(data: MonitoringSourceMainData, user_ctx: Dict = De
 def get_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
     try:
         monitoring_source = dal.get_monitoring_source(id, user_ctx["user_id"])
+    except NotFoundError:
+        raise HTTPException(status_code=404, detail="Resource not found")
+    except PermissionDeniedError:
+        raise HTTPException(status_code=403, detail="Insufficient permissions to access this resource")
+    except Exception:
+        logger.exception(f"User {user_ctx['user_id']} failed to get monitoring source {id}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+    if not monitoring_source:
+        raise HTTPException(status_code=404, detail="Resource not found")
+    return monitoring_source
+
+
+@monitoring_source_router.get(
+    "/monitoring-sources/{id:path}",
+    response_model=List[OsintView],
+    tags=["Monitoring Sources"],
+    operation_id="get_monitoring_source",
+)
+def get_monitoring_source_views(id: str, user_ctx: Dict = Depends(get_user_context)):
+    try:
+        monitoring_source = dal.get_views(id, user_ctx["user_id"])
     except NotFoundError:
         raise HTTPException(status_code=404, detail="Resource not found")
     except PermissionDeniedError:

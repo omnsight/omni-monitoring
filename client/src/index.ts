@@ -13,6 +13,7 @@ export type { MonitoringSource } from './models/MonitoringSource';
 export type { MonitoringSourceMainData } from './models/MonitoringSourceMainData';
 export type { MonitorTrigger } from './models/MonitorTrigger';
 export type { MonitorTriggerMainData } from './models/MonitorTriggerMainData';
+export type { OsintView } from './models/OsintView';
 export { SourceType } from './models/SourceType';
 export type { ValidationError } from './models/ValidationError';
 

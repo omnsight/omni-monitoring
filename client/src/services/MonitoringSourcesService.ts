@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { MonitoringSource } from '../models/MonitoringSource';
 import type { MonitoringSourceMainData } from '../models/MonitoringSourceMainData';
+import type { OsintView } from '../models/OsintView';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -61,16 +62,16 @@ export class MonitoringSourcesService {
         });
     }
     /**
-     * Get Monitoring Source
+     * Get Monitoring Source Views
      * @param id
      * @param authorization
-     * @returns MonitoringSource Successful Response
+     * @returns OsintView Successful Response
      * @throws ApiError
      */
     public static getMonitoringSource(
         id: string,
         authorization?: (string | null),
-    ): CancelablePromise<MonitoringSource> {
+    ): CancelablePromise<Array<OsintView>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/monitoring-sources/{id}',
