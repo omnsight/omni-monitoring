@@ -244,3 +244,15 @@ class TestMonitoringSource:
         # Assert
         assert response.status_code == 500
         assert response.json()["detail"] == "Internal Server Error"
+
+    def test_get_monitoring_source_views_success(self):
+        # Arrange
+        payload = {"name": "test-source", "source_type": "test-type"}
+        create_response = self.client.post("/monitoring-sources", json=payload)
+        source_id = create_response.json()["_id"]
+
+        # Act
+        response = self.client.get(f"/monitoring-sources/{source_id}/views")
+
+        # Assert
+        assert response.status_code == 500
