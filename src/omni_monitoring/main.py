@@ -14,15 +14,6 @@ from omni_monitoring.routers import (
 logger = logging.getLogger(__name__)
 
 
-@app.exception_handler(HTTPException)
-async def http_exception_handler(request: Request, exc: HTTPException):
-    logger.error(f"HTTPException: {exc.status_code} {exc.detail}")
-    return JSONResponse(
-        status_code=exc.status_code,
-        content={"detail": exc.detail},
-    )
-
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_omni_library()
@@ -30,6 +21,15 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Omni Monitoring", lifespan=lifespan)
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    logger.error(f"HTTPException: {exc.status_code} {exc.detail}")
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail},
+    )
 
 # Include routers
 app.include_router(health_router)
