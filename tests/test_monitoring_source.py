@@ -255,4 +255,4 @@ class TestMonitoringSource:
         response = self.client.get(f"/monitoring-sources/{source_id}/views")
 
         # Assert
-        assert response.status_code == 500
+        assert response.status_code == 200, f"{response}"
