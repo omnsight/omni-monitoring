@@ -583,11 +583,13 @@
         "properties": {
           "language": {
             "type": "string",
+            "maxLength": 10,
             "title": "Language",
             "description": "The language that workflow generates data in by the trigger"
           },
           "user_id": {
             "type": "string",
+            "maxLength": 100,
             "title": "User Id",
             "description": "ID of user who created the trigger"
           }
@@ -604,6 +606,7 @@
         "properties": {
           "language": {
             "type": "string",
+            "maxLength": 10,
             "title": "Language",
             "description": "The language that workflow generates data in by the trigger"
           }
@@ -620,7 +623,8 @@
           "name": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 100
               },
               {
                 "type": "null"
@@ -632,7 +636,8 @@
           "description": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 200
               },
               {
                 "type": "null"
@@ -644,7 +649,8 @@
           "type": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/SourceType"
+                "$ref": "#/components/schemas/SourceType",
+                "maxLength": 30
               },
               {
                 "type": "null"
@@ -655,7 +661,8 @@
           "url": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 200
               },
               {
                 "type": "null"
@@ -667,7 +674,9 @@
           "reliability": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -679,7 +688,8 @@
           "last_reviewed": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -692,7 +702,8 @@
             "anyOf": [
               {
                 "additionalProperties": true,
-                "type": "object"
+                "type": "object",
+                "maxProperties": 50
               },
               {
                 "type": "null"
@@ -740,7 +751,8 @@
           "created_at": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -752,7 +764,8 @@
           "updated_at": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -763,6 +776,7 @@
           },
           "owner": {
             "type": "string",
+            "maxLength": 100,
             "title": "Owner",
             "description": "Identify the user the monitoring source belongs to"
           }
@@ -778,7 +792,8 @@
           "name": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 100
               },
               {
                 "type": "null"
@@ -790,7 +805,8 @@
           "description": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 200
               },
               {
                 "type": "null"
@@ -802,7 +818,8 @@
           "type": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/SourceType"
+                "$ref": "#/components/schemas/SourceType",
+                "maxLength": 30
               },
               {
                 "type": "null"
@@ -813,7 +830,8 @@
           "url": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 200
               },
               {
                 "type": "null"
@@ -825,7 +843,9 @@
           "reliability": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -837,7 +857,8 @@
           "last_reviewed": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -850,7 +871,8 @@
             "anyOf": [
               {
                 "additionalProperties": true,
-                "type": "object"
+                "type": "object",
+                "maxProperties": 50
               },
               {
                 "type": "null"
@@ -867,6 +889,7 @@
         "properties": {
           "owner": {
             "type": "string",
+            "maxLength": 100,
             "title": "Owner",
             "description": "Owner of the document"
           },
@@ -875,6 +898,7 @@
               "type": "string"
             },
             "type": "array",
+            "maxItems": 100,
             "title": "Read",
             "description": "Users/Roles with read access"
           },
@@ -883,6 +907,7 @@
               "type": "string"
             },
             "type": "array",
+            "maxItems": 100,
             "title": "Write",
             "description": "Users/Roles with write access"
           },
@@ -925,7 +950,8 @@
           "created_at": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -937,7 +963,8 @@
           "updated_at": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -949,7 +976,8 @@
           "name": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 100
               },
               {
                 "type": "null"
@@ -961,7 +989,8 @@
           "description": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "maxLength": 200
               },
               {
                 "type": "null"
@@ -977,7 +1006,8 @@
                   "additionalProperties": true,
                   "type": "object"
                 },
-                "type": "array"
+                "type": "array",
+                "maxItems": 5000
               },
               {
                 "type": "null"
