@@ -11,6 +11,7 @@ from omni_monitoring.main import app
 class TestMonitoringSource:
     client: TestClient
     no_roles_client: TestClient
+    guest_client: TestClient
 
     @classmethod
     def setup_class(cls):
@@ -26,6 +27,8 @@ class TestMonitoringSource:
         no_roles_token = jwt.encode(no_roles_payload, key=None, algorithm="none")
         cls.no_roles_client = TestClient(app)
         cls.no_roles_client.headers = {"Authorization": f"Bearer {no_roles_token}"}
+
+        cls.guest_client = TestClient(app)
 
     def teardown_method(self, method):
         # This method is called after each test.
@@ -52,10 +55,12 @@ class TestMonitoringSource:
 
         # Act
         response = self.no_roles_client.post("/monitoring-sources", json=payload)
+        guest_response = self.guest_client.post("/monitoring-sources", json=payload)
 
         # Assert
         assert response.status_code == 403
         assert response.json()["detail"] == "Only the owner can create this resource"
+        assert guest_response.status_code == 401
 
     @patch("omni_monitoring.routers.monitoring_source.dal.create_monitoring_source")
     def test_create_monitoring_source_internal_error(self, mock_create):
@@ -104,10 +109,12 @@ class TestMonitoringSource:
 
         # Act
         response = self.no_roles_client.delete(f"/monitoring-sources/{source_id}")
+        guest_response = self.guest_client.delete(f"/monitoring-sources/{source_id}")
 
         # Assert
         assert response.status_code == 403
         assert response.json()["detail"] == "Insufficient permissions to access this resource"
+        assert guest_response.status_code == 401
 
     @patch("omni_monitoring.routers.monitoring_source.dal.delete_monitoring_source")
     def test_delete_monitoring_source_internal_error(self, mock_delete):
@@ -150,10 +157,12 @@ class TestMonitoringSource:
 
         # Act
         response = self.no_roles_client.get(f"/monitoring-sources/{source_id}")
+        guest_response = self.guest_client.get(f"/monitoring-sources/{source_id}")
 
         # Assert
         assert response.status_code == 403
         assert response.json()["detail"] == "Insufficient permissions to access this resource"
+        assert guest_response.status_code == 401
 
     @patch("omni_monitoring.routers.monitoring_source.dal.get_monitoring_source")
     def test_get_monitoring_source_internal_error(self, mock_get):
@@ -227,10 +236,12 @@ class TestMonitoringSource:
 
         # Act
         response = self.no_roles_client.put(f"/monitoring-sources/{source_id}", json=update_payload)
+        guest_response = self.guest_client.put(f"/monitoring-sources/{source_id}", json=update_payload)
 
         # Assert
         assert response.status_code == 403
         assert response.json()["detail"] == "Insufficient permissions to access this resource"
+        assert guest_response.status_code == 401
 
     @patch("omni_monitoring.routers.monitoring_source.dal.update_monitoring_source")
     def test_update_monitoring_source_internal_error(self, mock_update):

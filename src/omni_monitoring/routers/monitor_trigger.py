@@ -17,6 +17,8 @@ dal = MonitorTriggerDataAccessLayer()
     "/monitor-triggers", response_model=MonitorTrigger, tags=["Monitor Triggers"], operation_id="create_monitor_trigger"
 )
 def create_monitor_trigger(trigger: MonitorTriggerMainData, user_ctx: Dict = Depends(get_user_context)):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     try:
         trigger = MonitorTrigger(
             user_id=user_ctx["user_id"],
@@ -33,6 +35,8 @@ def create_monitor_trigger(trigger: MonitorTriggerMainData, user_ctx: Dict = Dep
     "/monitor-triggers", response_model=MonitorTrigger, tags=["Monitor Triggers"], operation_id="get_monitor_trigger"
 )
 def get_monitor_trigger(user_ctx: Dict = Depends(get_user_context)):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     try:
         trigger = dal.get_monitor_trigger(user_id=user_ctx["user_id"])
     except Exception:
@@ -48,6 +52,8 @@ def get_monitor_trigger(user_ctx: Dict = Depends(get_user_context)):
     "/monitor-triggers", status_code=204, tags=["Monitor Triggers"], operation_id="delete_monitor_trigger"
 )
 def delete_monitor_trigger(user_ctx: Dict = Depends(get_user_context)):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     trigger = dal.get_monitor_trigger(user_id=user_ctx["user_id"])
 
     if not trigger:
