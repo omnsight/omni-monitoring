@@ -21,6 +21,8 @@ dal = MonitoringSourceDataAccessLayer()
     operation_id="create_monitoring_source",
 )
 def create_monitoring_source(data: MonitoringSourceMainData, user_ctx: Dict = Depends(get_user_context)):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     try:
         return dal.create_monitoring_source(data, user_ctx["user_id"], user_ctx["roles"])
     except PermissionDeniedError:
@@ -43,6 +45,8 @@ def get_monitoring_source_views(
     ),
     user_ctx: Dict = Depends(get_user_context),
 ):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     try:
         views = dal.get_views(id, user_ctx["user_id"])
         return views
@@ -63,6 +67,8 @@ def get_monitoring_source(
     ),
     user_ctx: Dict = Depends(get_user_context),
 ):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     try:
         monitoring_source = dal.get_monitoring_source(id, user_ctx["user_id"])
     except NotFoundError:
@@ -85,6 +91,8 @@ def get_monitoring_source(
     operation_id="get_monitoring_sources_by_user",
 )
 def get_monitoring_sources_by_user(limit: int = 100, offset: int = 0, user_ctx: Dict = Depends(get_user_context)):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     try:
         return dal.get_monitoring_sources_by_user(user_ctx["user_id"], limit=limit, offset=offset)
     except Exception:
@@ -105,6 +113,8 @@ def update_monitoring_source(
     data: MonitoringSourceMainData = Body(...),
     user_ctx: Dict = Depends(get_user_context),
 ):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     try:
         return dal.update_monitoring_source(id, data, user_ctx["user_id"], user_ctx["roles"])
     except NotFoundError:
@@ -128,6 +138,8 @@ def delete_monitoring_source(
     ),
     user_ctx: Dict = Depends(get_user_context),
 ):
+    if not user_ctx["user_id"]:
+        raise HTTPException(status_code=401, detail="No permission")
     try:
         dal.delete_monitoring_source(id, user_ctx["user_id"])
         return {"message": "Monitoring source deleted successfully"}

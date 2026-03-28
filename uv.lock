@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.10"
 
 [[package]]
@@ -698,7 +698,7 @@ wheels = [
 
 [[package]]
 name = "omni-monitoring"
-version = "0.3.0"
+version = "0.4.0"
 source = { editable = "." }
 dependencies = [
     { name = "fastapi" },
@@ -741,7 +741,7 @@ provides-extras = ["dev"]
 [[package]]
 name = "omni-python-library"
 version = "0.1.0"
-source = { git = "https://github.com/omnsight/omni-python-library#54cd95fc38ce3abb4d9654fdd6794b6962dcb9ee" }
+source = { git = "https://github.com/omnsight/omni-python-library#9ad973e1e2a2c8c86c1bb13263dcbaadbb3c3bcd" }
 dependencies = [
     { name = "cachetools" },
     { name = "fastapi" },

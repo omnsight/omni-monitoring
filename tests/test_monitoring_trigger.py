@@ -3,7 +3,7 @@ from unittest.mock import patch
 import jwt
 from fastapi.testclient import TestClient
 from omni_python_library import init_omni_library
-from omni_python_library.models import MonitorTriggerMainData
+from omni_python_library.models.monitor_trigger import MonitorTriggerMainData
 from omni_python_library.utils.config import UserRole
 
 from omni_monitoring.main import app
@@ -11,6 +11,7 @@ from omni_monitoring.main import app
 
 class TestMonitorTrigger:
     client: TestClient
+    guest_client: TestClient
 
     @classmethod
     def setup_class(cls):
@@ -20,6 +21,8 @@ class TestMonitorTrigger:
         token = jwt.encode(payload, key=None, algorithm="none")
         cls.client = TestClient(app)
         cls.client.headers = {"Authorization": f"Bearer {token}"}
+
+        cls.guest_client = TestClient(app)
 
     def teardown_method(self, method):
         self.client.delete("/monitor-triggers")
@@ -51,6 +54,18 @@ class TestMonitorTrigger:
         # Assert
         assert response.status_code == 500
         assert response.json()["detail"] == "Internal Server Error"
+
+    def test_create_monitor_trigger_permission_denied(self):
+        # Arrange
+        payload = MonitorTriggerMainData(
+            language="en",
+        )
+
+        # Act
+        response = self.guest_client.post("/monitor-triggers", json=payload.model_dump(exclude_unset=True))
+
+        # Assert
+        assert response.status_code == 401
 
     def test_get_monitor_trigger_success(self):
         # Arrange
@@ -85,6 +100,13 @@ class TestMonitorTrigger:
         # Assert
         assert response.status_code == 500
         assert response.json()["detail"] == "Internal Server Error"
+
+    def test_get_monitor_trigger_permission_denied(self):
+        # Act
+        response = self.guest_client.get("/monitor-triggers")
+
+        # Assert
+        assert response.status_code == 401
 
     def test_delete_monitor_trigger_success(self):
         # Arrange
@@ -126,3 +148,10 @@ class TestMonitorTrigger:
         # Assert
         assert response.status_code == 500
         assert response.json()["detail"] == "Internal Server Error"
+
+    def test_delete_monitor_trigger_permission_denied(self):
+        # Act
+        response = self.guest_client.delete("/monitor-triggers")
+
+        # Assert
+        assert response.status_code == 401
