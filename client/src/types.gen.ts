@@ -399,6 +399,8 @@ export type GetMonitoringSourceViewsData = {
     path: {
         /**
          * Id
+         *
+         * The ArangoDB Document ID (e.g., collection/123)
          */
         id: string;
     };
@@ -437,6 +439,8 @@ export type DeleteMonitoringSourceData = {
     path: {
         /**
          * Id
+         *
+         * The ArangoDB Document ID (e.g., collection/123)
          */
         id: string;
     };
@@ -473,6 +477,8 @@ export type GetMonitoringSourceData = {
     path: {
         /**
          * Id
+         *
+         * The ArangoDB Document ID (e.g., collection/123)
          */
         id: string;
     };
@@ -509,6 +515,8 @@ export type UpdateMonitoringSourceData = {
     path: {
         /**
          * Id
+         *
+         * The ArangoDB Document ID (e.g., collection/123)
          */
         id: string;
     };

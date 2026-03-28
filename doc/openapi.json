@@ -170,8 +170,11 @@
             "required": true,
             "schema": {
               "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+\\/[A-Za-z0-9_-]+$",
+              "description": "The ArangoDB Document ID (e.g., collection/123)",
               "title": "Id"
-            }
+            },
+            "description": "The ArangoDB Document ID (e.g., collection/123)"
           },
           {
             "name": "authorization",
@@ -232,8 +235,11 @@
             "required": true,
             "schema": {
               "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+\\/[A-Za-z0-9_-]+$",
+              "description": "The ArangoDB Document ID (e.g., collection/123)",
               "title": "Id"
-            }
+            },
+            "description": "The ArangoDB Document ID (e.g., collection/123)"
           },
           {
             "name": "authorization",
@@ -288,8 +294,11 @@
             "required": true,
             "schema": {
               "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+\\/[A-Za-z0-9_-]+$",
+              "description": "The ArangoDB Document ID (e.g., collection/123)",
               "title": "Id"
-            }
+            },
+            "description": "The ArangoDB Document ID (e.g., collection/123)"
           },
           {
             "name": "authorization",
@@ -354,8 +363,11 @@
             "required": true,
             "schema": {
               "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+\\/[A-Za-z0-9_-]+$",
+              "description": "The ArangoDB Document ID (e.g., collection/123)",
               "title": "Id"
-            }
+            },
+            "description": "The ArangoDB Document ID (e.g., collection/123)"
           },
           {
             "name": "authorization",
