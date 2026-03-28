@@ -1,7 +1,7 @@
 import logging
 from typing import Dict, List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends, HTTPException, Path
 from omni_python_library.dal import MonitoringSourceDataAccessLayer
 from omni_python_library.middleware import get_user_context
 from omni_python_library.models import MonitoringSource, MonitoringSourceMainData, OsintView
@@ -37,7 +37,12 @@ def create_monitoring_source(data: MonitoringSourceMainData, user_ctx: Dict = De
     tags=["Monitoring Sources"],
     operation_id="get_monitoring_source_views",
 )
-def get_monitoring_source_views(id: str, user_ctx: Dict = Depends(get_user_context)):
+def get_monitoring_source_views(
+    id: str = Path(
+        pattern=r"^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$", description="The ArangoDB Document ID (e.g., collection/123)"
+    ),
+    user_ctx: Dict = Depends(get_user_context),
+):
     try:
         views = dal.get_views(id, user_ctx["user_id"])
         return views
@@ -52,7 +57,12 @@ def get_monitoring_source_views(id: str, user_ctx: Dict = Depends(get_user_conte
     tags=["Monitoring Sources"],
     operation_id="get_monitoring_source",
 )
-def get_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
+def get_monitoring_source(
+    id: str = Path(
+        pattern=r"^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$", description="The ArangoDB Document ID (e.g., collection/123)"
+    ),
+    user_ctx: Dict = Depends(get_user_context),
+):
     try:
         monitoring_source = dal.get_monitoring_source(id, user_ctx["user_id"])
     except NotFoundError:
@@ -88,7 +98,13 @@ def get_monitoring_sources_by_user(limit: int = 100, offset: int = 0, user_ctx: 
     tags=["Monitoring Sources"],
     operation_id="update_monitoring_source",
 )
-def update_monitoring_source(id: str, data: MonitoringSourceMainData, user_ctx: Dict = Depends(get_user_context)):
+def update_monitoring_source(
+    id: str = Path(
+        pattern=r"^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$", description="The ArangoDB Document ID (e.g., collection/123)"
+    ),
+    data: MonitoringSourceMainData = Body(...),
+    user_ctx: Dict = Depends(get_user_context),
+):
     try:
         return dal.update_monitoring_source(id, data, user_ctx["user_id"], user_ctx["roles"])
     except NotFoundError:
@@ -106,7 +122,12 @@ def update_monitoring_source(id: str, data: MonitoringSourceMainData, user_ctx: 
     tags=["Monitoring Sources"],
     operation_id="delete_monitoring_source",
 )
-def delete_monitoring_source(id: str, user_ctx: Dict = Depends(get_user_context)):
+def delete_monitoring_source(
+    id: str = Path(
+        pattern=r"^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$", description="The ArangoDB Document ID (e.g., collection/123)"
+    ),
+    user_ctx: Dict = Depends(get_user_context),
+):
     try:
         dal.delete_monitoring_source(id, user_ctx["user_id"])
         return {"message": "Monitoring source deleted successfully"}

@@ -90,7 +90,7 @@ class TestMonitoringSource:
 
     def test_delete_monitoring_source_not_found(self):
         # Act
-        response = self.client.delete("/monitoring-sources/non-existent-id")
+        response = self.client.delete("/monitoring-sources/non-existent/id")
 
         # Assert
         assert response.status_code == 404
@@ -115,7 +115,7 @@ class TestMonitoringSource:
         mock_delete.side_effect = Exception("Internal error")
 
         # Act
-        response = self.client.delete("/monitoring-sources/some-id")
+        response = self.client.delete("/monitoring-sources/some/id")
 
         # Assert
         assert response.status_code == 500
@@ -136,7 +136,7 @@ class TestMonitoringSource:
 
     def test_get_monitoring_source_not_found(self):
         # Act
-        response = self.client.get("/monitoring-sources/non-existent-id")
+        response = self.client.get("/monitoring-sources/non-existent/id")
 
         # Assert
         assert response.status_code == 404
@@ -161,7 +161,7 @@ class TestMonitoringSource:
         mock_get.side_effect = Exception("Internal error")
 
         # Act
-        response = self.client.get("/monitoring-sources/some-id")
+        response = self.client.get("/monitoring-sources/some/id")
 
         # Assert
         assert response.status_code == 500
@@ -212,7 +212,7 @@ class TestMonitoringSource:
         update_payload = {"name": "updated-source", "source_type": "updated-type"}
 
         # Act
-        response = self.client.put("/monitoring-sources/non-existent-id", json=update_payload)
+        response = self.client.put("/monitoring-sources/non-existent/id", json=update_payload)
 
         # Assert
         assert response.status_code == 404
@@ -239,7 +239,7 @@ class TestMonitoringSource:
         update_payload = {"name": "updated-source", "source_type": "updated-type"}
 
         # Act
-        response = self.client.put("/monitoring-sources/some-id", json=update_payload)
+        response = self.client.put("/monitoring-sources/some/id", json=update_payload)
 
         # Assert
         assert response.status_code == 500
