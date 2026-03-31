@@ -15,18 +15,6 @@ export type HttpValidationError = {
 };
 
 /**
- * HealthCheck
- */
-export type HealthCheck = {
-    /**
-     * Status
-     *
-     * The health status of the service.
-     */
-    status: string;
-};
-
-/**
  * MonitorTrigger
  *
  * Model for monitor trigger.
@@ -298,22 +286,6 @@ export type ValidationError = {
         [key: string]: unknown;
     };
 };
-
-export type HealthCheckData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/health/monitoring';
-};
-
-export type HealthCheckResponses = {
-    /**
-     * Successful Response
-     */
-    200: HealthCheck;
-};
-
-export type HealthCheckResponse = HealthCheckResponses[keyof HealthCheckResponses];
 
 export type GetMonitoringSourcesByUserData = {
     body?: never;

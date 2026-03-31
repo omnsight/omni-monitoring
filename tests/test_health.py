@@ -13,6 +13,6 @@ class TestHealth:
         cls.client = TestClient(app)
 
     def test_health_check(self):
-        response = self.client.get("/health/monitoring")
+        response = self.client.get("/health")
         assert response.status_code == 200
         assert response.json() == {"status": "ok"}
