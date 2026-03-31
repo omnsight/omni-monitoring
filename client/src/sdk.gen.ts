@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { CreateMonitoringSourceData, CreateMonitoringSourceErrors, CreateMonitoringSourceResponses, CreateMonitorTriggerData, CreateMonitorTriggerErrors, CreateMonitorTriggerResponses, DeleteMonitoringSourceData, DeleteMonitoringSourceErrors, DeleteMonitoringSourceResponses, DeleteMonitorTriggerData, DeleteMonitorTriggerErrors, DeleteMonitorTriggerResponses, GetMonitoringSourceData, GetMonitoringSourceErrors, GetMonitoringSourceResponses, GetMonitoringSourcesByUserData, GetMonitoringSourcesByUserErrors, GetMonitoringSourcesByUserResponses, GetMonitoringSourceViewsData, GetMonitoringSourceViewsErrors, GetMonitoringSourceViewsResponses, GetMonitorTriggerData, GetMonitorTriggerErrors, GetMonitorTriggerResponses, HealthCheckData, HealthCheckResponses, UpdateMonitoringSourceData, UpdateMonitoringSourceErrors, UpdateMonitoringSourceResponses } from './types.gen';
+import type { CreateMonitoringSourceData, CreateMonitoringSourceErrors, CreateMonitoringSourceResponses, CreateMonitorTriggerData, CreateMonitorTriggerErrors, CreateMonitorTriggerResponses, DeleteMonitoringSourceData, DeleteMonitoringSourceErrors, DeleteMonitoringSourceResponses, DeleteMonitorTriggerData, DeleteMonitorTriggerErrors, DeleteMonitorTriggerResponses, GetMonitoringSourceData, GetMonitoringSourceErrors, GetMonitoringSourceResponses, GetMonitoringSourcesByUserData, GetMonitoringSourcesByUserErrors, GetMonitoringSourcesByUserResponses, GetMonitoringSourceViewsData, GetMonitoringSourceViewsErrors, GetMonitoringSourceViewsResponses, GetMonitorTriggerData, GetMonitorTriggerErrors, GetMonitorTriggerResponses, UpdateMonitoringSourceData, UpdateMonitoringSourceErrors, UpdateMonitoringSourceResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -17,15 +17,6 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
      */
     meta?: Record<string, unknown>;
 };
-
-/**
- * Health Check
- */
-export const healthCheck = <ThrowOnError extends boolean = false>(options?: Options<HealthCheckData, ThrowOnError>) => (options?.client ?? client).get<HealthCheckResponses, unknown, ThrowOnError>({
-    responseType: 'json',
-    url: '/health/monitoring',
-    ...options
-});
 
 /**
  * Get Monitoring Sources By User
