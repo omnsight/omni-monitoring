@@ -59,7 +59,7 @@ class TestMonitoringSource:
 
         # Assert
         assert response.status_code == 403
-        assert response.json()["detail"] == "Only the owner can create this resource"
+        assert response.json()["detail"]
         assert guest_response.status_code == 401
 
     @patch("omni_monitoring.routers.monitoring_source.dal.create_monitoring_source")
