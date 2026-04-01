@@ -27,7 +27,7 @@ def create_monitoring_source(data: MonitoringSourceMainData, user_ctx: Dict = De
         return dal.create_monitoring_source(data, user_ctx["user_id"], user_ctx["roles"])
     except PermissionDeniedError:
         logger.exception(f"User {user_ctx['user_id']} failed to create monitoring source {data}")
-        raise HTTPException(status_code=403, detail="Only the owner can create this resource")
+        raise HTTPException(status_code=403, detail="Only paid users can create this resource")
     except Exception:
         logger.exception(f"User {user_ctx['user_id']} failed to create monitoring source {data}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
