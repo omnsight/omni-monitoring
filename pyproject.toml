@@ -13,6 +13,7 @@ dependencies = [
     "pydantic>=2.0.0",
     "fastapi>=0.100.0",
     "omni-python-library @ git+https://github.com/omnsight/omni-python-library",
+    "python-json-logger",
 ]
 
 [project.optional-dependencies]
