@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Application startup")
+    logger.info("Service - Monitoring - starting up...")
     init_omni_library()
 
     loggers = ["uvicorn", "uvicorn.access", "uvicorn.error", "fastapi"]
@@ -46,7 +46,7 @@ async def lifespan(app: FastAPI):
     logger.info(f"Stopped default logging for {loggers}")
 
     yield
-    logger.info("Application shutdown")
+    logger.info("Service - Monitoring - shut down")
 
 
 app = FastAPI(title="Omni Monitoring", lifespan=lifespan)

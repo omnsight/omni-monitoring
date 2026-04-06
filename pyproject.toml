@@ -4,14 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "omni-monitoring"
-version = "1.0.2"
+version = "1.0.3"
 description = "Omni Monitoring Service"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "uvicorn>=0.22.0",
-    "pydantic>=2.0.0",
-    "fastapi>=0.100.0",
     "omni-python-library @ git+https://github.com/omnsight/omni-python-library",
     "python-json-logger",
 ]

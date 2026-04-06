@@ -713,11 +713,8 @@ name = "omni-monitoring"
 version = "1.0.2"
 source = { editable = "." }
 dependencies = [
-    { name = "fastapi" },
     { name = "omni-python-library" },
-    { name = "pydantic" },
     { name = "python-json-logger" },
-    { name = "uvicorn" },
 ]
 
 [package.optional-dependencies]
@@ -736,19 +733,16 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "black", marker = "extra == 'dev'", specifier = ">=25.11.0" },
-    { name = "fastapi", specifier = ">=0.100.0" },
     { name = "isort", marker = "extra == 'dev'", specifier = ">=5.0.0" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "omni-python-library", git = "https://github.com/omnsight/omni-python-library" },
     { name = "poethepoet", marker = "extra == 'dev'", specifier = ">=0.27.0" },
-    { name = "pydantic", specifier = ">=2.0.0" },
     { name = "pyjwt", marker = "extra == 'dev'", specifier = ">=2.8.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "pytest-asyncio", marker = "extra == 'dev'" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0.0" },
     { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.10.0" },
     { name = "python-json-logger" },
-    { name = "uvicorn", specifier = ">=0.22.0" },
 ]
 provides-extras = ["dev"]
 
