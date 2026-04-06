@@ -34,7 +34,7 @@ async def lifespan(app: FastAPI):
     logger.info("Service - Monitoring - starting up...")
     init_omni_library()
 
-    loggers = ["uvicorn", "uvicorn.access", "uvicorn.error", "fastapi"]
+    loggers = ["uvicorn.access"]
     for logger_name in loggers:
         logging_logger = logging.getLogger(logger_name)
         logging_logger.handlers = []

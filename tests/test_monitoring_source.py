@@ -33,9 +33,9 @@ class TestMonitoringSource:
     def teardown_method(self, method):
         # This method is called after each test.
         # It's a good place to clean up resources created during the test.
-        response = self.client.get("/monitoring-sources")
+        response = self.client.get("/monitoring-sources/user")
         for item in response.json():
-            self.client.delete(f"/monitoring-sources/{item['_id']}")
+            self.client.delete(f"/monitoring-sources?id={item['_id']}")
 
     def test_create_monitoring_source_success(self):
         # Arrange
@@ -82,20 +82,20 @@ class TestMonitoringSource:
         source_id = create_response.json()["_id"]
 
         # Act
-        delete_response = self.client.delete(f"/monitoring-sources/{source_id}")
+        delete_response = self.client.delete(f"/monitoring-sources?id={source_id}")
 
         # Assert
         assert delete_response.status_code == 204
-        get_response = self.client.get(f"/monitoring-sources/{source_id}")
+        get_response = self.client.get(f"/monitoring-sources?id={source_id}")
         assert get_response.status_code == 404
 
     def test_get_bad_monitoring_source(self):
-        get_response = self.client.get("/monitoring-sources/bad_collection/1234")
+        get_response = self.client.get("/monitoring-sources?id=bad_collection/1234")
         assert get_response.status_code == 404
 
     def test_delete_monitoring_source_not_found(self):
         # Act
-        response = self.client.delete("/monitoring-sources/non-existent/id")
+        response = self.client.delete("/monitoring-sources?id=non-existent/id")
 
         # Assert
         assert response.status_code == 404
@@ -108,8 +108,8 @@ class TestMonitoringSource:
         source_id = create_response.json()["_id"]
 
         # Act
-        response = self.no_roles_client.delete(f"/monitoring-sources/{source_id}")
-        guest_response = self.guest_client.delete(f"/monitoring-sources/{source_id}")
+        response = self.no_roles_client.delete(f"/monitoring-sources?id={source_id}")
+        guest_response = self.guest_client.delete(f"/monitoring-sources?id={source_id}")
 
         # Assert
         assert response.status_code == 403
@@ -122,7 +122,7 @@ class TestMonitoringSource:
         mock_delete.side_effect = Exception("Internal error")
 
         # Act
-        response = self.client.delete("/monitoring-sources/some/id")
+        response = self.client.delete("/monitoring-sources?id=some/id")
 
         # Assert
         assert response.status_code == 500
@@ -135,7 +135,7 @@ class TestMonitoringSource:
         source_id = create_response.json()["_id"]
 
         # Act
-        response = self.client.get(f"/monitoring-sources/{source_id}")
+        response = self.client.get(f"/monitoring-sources?id={source_id}")
 
         # Assert
         assert response.status_code == 200
@@ -143,7 +143,7 @@ class TestMonitoringSource:
 
     def test_get_monitoring_source_not_found(self):
         # Act
-        response = self.client.get("/monitoring-sources/non-existent/id")
+        response = self.client.get("/monitoring-sources?id=non-existent/id")
 
         # Assert
         assert response.status_code == 404
@@ -156,8 +156,8 @@ class TestMonitoringSource:
         source_id = create_response.json()["_id"]
 
         # Act
-        response = self.no_roles_client.get(f"/monitoring-sources/{source_id}")
-        guest_response = self.guest_client.get(f"/monitoring-sources/{source_id}")
+        response = self.no_roles_client.get(f"/monitoring-sources?id={source_id}")
+        guest_response = self.guest_client.get(f"/monitoring-sources?id={source_id}")
 
         # Assert
         assert response.status_code == 403
@@ -170,7 +170,7 @@ class TestMonitoringSource:
         mock_get.side_effect = Exception("Internal error")
 
         # Act
-        response = self.client.get("/monitoring-sources/some/id")
+        response = self.client.get("/monitoring-sources?id=some/id")
 
         # Assert
         assert response.status_code == 500
@@ -184,7 +184,7 @@ class TestMonitoringSource:
         self.client.post("/monitoring-sources", json=payload2)
 
         # Act
-        response = self.client.get("/monitoring-sources")
+        response = self.client.get("/monitoring-sources/user")
 
         # Assert
         assert response.status_code == 200
@@ -196,7 +196,7 @@ class TestMonitoringSource:
         mock_get_all.side_effect = Exception("Internal error")
 
         # Act
-        response = self.client.get("/monitoring-sources")
+        response = self.client.get(f"/monitoring-sources/user?user_id=some/user/id")
 
         # Assert
         assert response.status_code == 500
@@ -210,7 +210,7 @@ class TestMonitoringSource:
         update_payload = {"name": "updated-source", "source_type": "updated-type"}
 
         # Act
-        response = self.client.put(f"/monitoring-sources/{source_id}", json=update_payload)
+        response = self.client.put(f"/monitoring-sources?id={source_id}", json=update_payload)
 
         # Assert
         assert response.status_code == 200
@@ -221,7 +221,7 @@ class TestMonitoringSource:
         update_payload = {"name": "updated-source", "source_type": "updated-type"}
 
         # Act
-        response = self.client.put("/monitoring-sources/non-existent/id", json=update_payload)
+        response = self.client.put("/monitoring-sources?id=non-existent/id", json=update_payload)
 
         # Assert
         assert response.status_code == 404
@@ -235,8 +235,8 @@ class TestMonitoringSource:
         update_payload = {"name": "updated-source", "source_type": "updated-type"}
 
         # Act
-        response = self.no_roles_client.put(f"/monitoring-sources/{source_id}", json=update_payload)
-        guest_response = self.guest_client.put(f"/monitoring-sources/{source_id}", json=update_payload)
+        response = self.no_roles_client.put(f"/monitoring-sources?id={source_id}", json=update_payload)
+        guest_response = self.guest_client.put(f"/monitoring-sources?id={source_id}", json=update_payload)
 
         # Assert
         assert response.status_code == 403
@@ -250,7 +250,7 @@ class TestMonitoringSource:
         update_payload = {"name": "updated-source", "source_type": "updated-type"}
 
         # Act
-        response = self.client.put("/monitoring-sources/some/id", json=update_payload)
+        response = self.client.put("/monitoring-sources?id=some/id", json=update_payload)
 
         # Assert
         assert response.status_code == 500
@@ -263,7 +263,7 @@ class TestMonitoringSource:
         source_id = create_response.json()["_id"]
 
         # Act
-        response = self.client.get(f"/monitoring-sources/{source_id}/views")
+        response = self.client.get(f"/monitoring-sources/views?id={source_id}")
 
         # Assert
         assert response.status_code == 200, f"{response}"

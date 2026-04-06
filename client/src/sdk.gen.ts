@@ -19,9 +19,14 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 /**
- * Get Monitoring Sources By User
+ * Delete Monitoring Source
  */
-export const getMonitoringSourcesByUser = <ThrowOnError extends boolean = false>(options?: Options<GetMonitoringSourcesByUserData, ThrowOnError>) => (options?.client ?? client).get<GetMonitoringSourcesByUserResponses, GetMonitoringSourcesByUserErrors, ThrowOnError>({
+export const deleteMonitoringSource = <ThrowOnError extends boolean = false>(options: Options<DeleteMonitoringSourceData, ThrowOnError>) => (options.client ?? client).delete<DeleteMonitoringSourceResponses, DeleteMonitoringSourceErrors, ThrowOnError>({ url: '/monitoring-sources', ...options });
+
+/**
+ * Get Monitoring Source
+ */
+export const getMonitoringSource = <ThrowOnError extends boolean = false>(options: Options<GetMonitoringSourceData, ThrowOnError>) => (options.client ?? client).get<GetMonitoringSourceResponses, GetMonitoringSourceErrors, ThrowOnError>({
     responseType: 'json',
     url: '/monitoring-sources',
     ...options
@@ -41,39 +46,34 @@ export const createMonitoringSource = <ThrowOnError extends boolean = false>(opt
 });
 
 /**
- * Get Monitoring Source Views
- */
-export const getMonitoringSourceViews = <ThrowOnError extends boolean = false>(options: Options<GetMonitoringSourceViewsData, ThrowOnError>) => (options.client ?? client).get<GetMonitoringSourceViewsResponses, GetMonitoringSourceViewsErrors, ThrowOnError>({
-    responseType: 'json',
-    url: '/monitoring-sources/{id}/views',
-    ...options
-});
-
-/**
- * Delete Monitoring Source
- */
-export const deleteMonitoringSource = <ThrowOnError extends boolean = false>(options: Options<DeleteMonitoringSourceData, ThrowOnError>) => (options.client ?? client).delete<DeleteMonitoringSourceResponses, DeleteMonitoringSourceErrors, ThrowOnError>({ url: '/monitoring-sources/{id}', ...options });
-
-/**
- * Get Monitoring Source
- */
-export const getMonitoringSource = <ThrowOnError extends boolean = false>(options: Options<GetMonitoringSourceData, ThrowOnError>) => (options.client ?? client).get<GetMonitoringSourceResponses, GetMonitoringSourceErrors, ThrowOnError>({
-    responseType: 'json',
-    url: '/monitoring-sources/{id}',
-    ...options
-});
-
-/**
  * Update Monitoring Source
  */
 export const updateMonitoringSource = <ThrowOnError extends boolean = false>(options: Options<UpdateMonitoringSourceData, ThrowOnError>) => (options.client ?? client).put<UpdateMonitoringSourceResponses, UpdateMonitoringSourceErrors, ThrowOnError>({
     responseType: 'json',
-    url: '/monitoring-sources/{id}',
+    url: '/monitoring-sources',
     ...options,
     headers: {
         'Content-Type': 'application/json',
         ...options.headers
     }
+});
+
+/**
+ * Get Monitoring Source Views
+ */
+export const getMonitoringSourceViews = <ThrowOnError extends boolean = false>(options: Options<GetMonitoringSourceViewsData, ThrowOnError>) => (options.client ?? client).get<GetMonitoringSourceViewsResponses, GetMonitoringSourceViewsErrors, ThrowOnError>({
+    responseType: 'json',
+    url: '/monitoring-sources/views',
+    ...options
+});
+
+/**
+ * Get Monitoring Sources By User
+ */
+export const getMonitoringSourcesByUser = <ThrowOnError extends boolean = false>(options?: Options<GetMonitoringSourcesByUserData, ThrowOnError>) => (options?.client ?? client).get<GetMonitoringSourcesByUserResponses, GetMonitoringSourcesByUserErrors, ThrowOnError>({
+    responseType: 'json',
+    url: '/monitoring-sources/user',
+    ...options
 });
 
 /**
