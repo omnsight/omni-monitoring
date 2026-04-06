@@ -1,7 +1,6 @@
 import logging
 import os
 import sys
-from pythonjsonlogger import jsonlogger
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
@@ -9,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from omni_python_library import init_omni_library
 from omni_python_library.middleware import RawASGILoggingMiddleware
+from pythonjsonlogger import jsonlogger
 
 from omni_monitoring.routers import (
     health_router,
@@ -20,10 +20,7 @@ from omni_monitoring.routers import (
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 log_level = logging.DEBUG if DEBUG else logging.INFO
 log_handler = logging.StreamHandler(sys.stdout)
-formatter = jsonlogger.JsonFormatter(
-    fmt="%(asctime)s %(levelname)s %(name)s %(message)s",
-    datefmt="%Y-%m-%dT%H:%M:%SZ"
-)
+formatter = jsonlogger.JsonFormatter(fmt="%(asctime)s %(levelname)s %(name)s %(message)s", datefmt="%Y-%m-%dT%H:%M:%SZ")
 log_handler.setFormatter(formatter)
 root_logger = logging.getLogger()
 root_logger.handlers = []
