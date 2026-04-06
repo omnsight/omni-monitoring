@@ -1,7 +1,7 @@
 import logging
 from typing import Dict, List
 
-from fastapi import APIRouter, Body, Depends, HTTPException, Path
+from fastapi import APIRouter, Body, Depends, HTTPException, Path, Query
 from omni_python_library.dal import MonitoringSourceDataAccessLayer
 from omni_python_library.middleware import get_user_context
 from omni_python_library.models import MonitoringSource, MonitoringSourceMainData, OsintView
@@ -34,13 +34,13 @@ def create_monitoring_source(data: MonitoringSourceMainData, user_ctx: Dict = De
 
 
 @monitoring_source_router.get(
-    "/monitoring-sources/{id:path}/views",
+    "/monitoring-sources/views",
     response_model=List[OsintView],
     tags=["Monitoring Sources"],
     operation_id="get_monitoring_source_views",
 )
 def get_monitoring_source_views(
-    id: str = Path(
+    id: str = Query(
         pattern=r"^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$", description="The ArangoDB Document ID (e.g., collection/123)"
     ),
     user_ctx: Dict = Depends(get_user_context),
@@ -56,13 +56,13 @@ def get_monitoring_source_views(
 
 
 @monitoring_source_router.get(
-    "/monitoring-sources/{id:path}",
+    "/monitoring-sources",
     response_model=MonitoringSource,
     tags=["Monitoring Sources"],
     operation_id="get_monitoring_source",
 )
 def get_monitoring_source(
-    id: str = Path(
+    id: str = Query(
         pattern=r"^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$", description="The ArangoDB Document ID (e.g., collection/123)"
     ),
     user_ctx: Dict = Depends(get_user_context),
@@ -85,7 +85,7 @@ def get_monitoring_source(
 
 
 @monitoring_source_router.get(
-    "/monitoring-sources",
+    "/monitoring-sources/user",
     response_model=List[MonitoringSource],
     tags=["Monitoring Sources"],
     operation_id="get_monitoring_sources_by_user",
@@ -101,16 +101,16 @@ def get_monitoring_sources_by_user(limit: int = 100, offset: int = 0, user_ctx: 
 
 
 @monitoring_source_router.put(
-    "/monitoring-sources/{id:path}",
+    "/monitoring-sources",
     response_model=MonitoringSource,
     tags=["Monitoring Sources"],
     operation_id="update_monitoring_source",
 )
 def update_monitoring_source(
-    id: str = Path(
+    data: MonitoringSourceMainData = Body(...),
+    id: str = Query(
         pattern=r"^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$", description="The ArangoDB Document ID (e.g., collection/123)"
     ),
-    data: MonitoringSourceMainData = Body(...),
     user_ctx: Dict = Depends(get_user_context),
 ):
     if not user_ctx["user_id"]:
@@ -127,13 +127,13 @@ def update_monitoring_source(
 
 
 @monitoring_source_router.delete(
-    "/monitoring-sources/{id:path}",
+    "/monitoring-sources",
     status_code=204,
     tags=["Monitoring Sources"],
     operation_id="delete_monitoring_source",
 )
 def delete_monitoring_source(
-    id: str = Path(
+    id: str = Query(
         pattern=r"^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$", description="The ArangoDB Document ID (e.g., collection/123)"
     ),
     user_ctx: Dict = Depends(get_user_context),
