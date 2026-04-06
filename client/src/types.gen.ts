@@ -287,7 +287,7 @@ export type ValidationError = {
     };
 };
 
-export type GetMonitoringSourcesByUserData = {
+export type DeleteMonitoringSourceData = {
     body?: never;
     headers?: {
         /**
@@ -296,38 +296,72 @@ export type GetMonitoringSourcesByUserData = {
         authorization?: string | null;
     };
     path?: never;
-    query?: {
+    query: {
         /**
-         * Limit
+         * Id
+         *
+         * The ArangoDB Document ID (e.g., collection/123)
          */
-        limit?: number;
-        /**
-         * Offset
-         */
-        offset?: number;
+        id: string;
     };
     url: '/monitoring-sources';
 };
 
-export type GetMonitoringSourcesByUserErrors = {
+export type DeleteMonitoringSourceErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type GetMonitoringSourcesByUserError = GetMonitoringSourcesByUserErrors[keyof GetMonitoringSourcesByUserErrors];
+export type DeleteMonitoringSourceError = DeleteMonitoringSourceErrors[keyof DeleteMonitoringSourceErrors];
 
-export type GetMonitoringSourcesByUserResponses = {
+export type DeleteMonitoringSourceResponses = {
     /**
-     * Response Get Monitoring Sources By User
-     *
      * Successful Response
      */
-    200: Array<MonitoringSource>;
+    204: void;
 };
 
-export type GetMonitoringSourcesByUserResponse = GetMonitoringSourcesByUserResponses[keyof GetMonitoringSourcesByUserResponses];
+export type DeleteMonitoringSourceResponse = DeleteMonitoringSourceResponses[keyof DeleteMonitoringSourceResponses];
+
+export type GetMonitoringSourceData = {
+    body?: never;
+    headers?: {
+        /**
+         * Authorization
+         */
+        authorization?: string | null;
+    };
+    path?: never;
+    query: {
+        /**
+         * Id
+         *
+         * The ArangoDB Document ID (e.g., collection/123)
+         */
+        id: string;
+    };
+    url: '/monitoring-sources';
+};
+
+export type GetMonitoringSourceErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetMonitoringSourceError = GetMonitoringSourceErrors[keyof GetMonitoringSourceErrors];
+
+export type GetMonitoringSourceResponses = {
+    /**
+     * Successful Response
+     */
+    200: MonitoringSource;
+};
+
+export type GetMonitoringSourceResponse = GetMonitoringSourceResponses[keyof GetMonitoringSourceResponses];
 
 export type CreateMonitoringSourceData = {
     body: MonitoringSourceMainData;
@@ -360,6 +394,44 @@ export type CreateMonitoringSourceResponses = {
 
 export type CreateMonitoringSourceResponse = CreateMonitoringSourceResponses[keyof CreateMonitoringSourceResponses];
 
+export type UpdateMonitoringSourceData = {
+    body: MonitoringSourceMainData;
+    headers?: {
+        /**
+         * Authorization
+         */
+        authorization?: string | null;
+    };
+    path?: never;
+    query: {
+        /**
+         * Id
+         *
+         * The ArangoDB Document ID (e.g., collection/123)
+         */
+        id: string;
+    };
+    url: '/monitoring-sources';
+};
+
+export type UpdateMonitoringSourceErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type UpdateMonitoringSourceError = UpdateMonitoringSourceErrors[keyof UpdateMonitoringSourceErrors];
+
+export type UpdateMonitoringSourceResponses = {
+    /**
+     * Successful Response
+     */
+    200: MonitoringSource;
+};
+
+export type UpdateMonitoringSourceResponse = UpdateMonitoringSourceResponses[keyof UpdateMonitoringSourceResponses];
+
 export type GetMonitoringSourceViewsData = {
     body?: never;
     headers?: {
@@ -368,7 +440,8 @@ export type GetMonitoringSourceViewsData = {
          */
         authorization?: string | null;
     };
-    path: {
+    path?: never;
+    query: {
         /**
          * Id
          *
@@ -376,8 +449,7 @@ export type GetMonitoringSourceViewsData = {
          */
         id: string;
     };
-    query?: never;
-    url: '/monitoring-sources/{id}/views';
+    url: '/monitoring-sources/views';
 };
 
 export type GetMonitoringSourceViewsErrors = {
@@ -400,7 +472,7 @@ export type GetMonitoringSourceViewsResponses = {
 
 export type GetMonitoringSourceViewsResponse = GetMonitoringSourceViewsResponses[keyof GetMonitoringSourceViewsResponses];
 
-export type DeleteMonitoringSourceData = {
+export type GetMonitoringSourcesByUserData = {
     body?: never;
     headers?: {
         /**
@@ -408,111 +480,39 @@ export type DeleteMonitoringSourceData = {
          */
         authorization?: string | null;
     };
-    path: {
+    path?: never;
+    query?: {
         /**
-         * Id
-         *
-         * The ArangoDB Document ID (e.g., collection/123)
+         * Limit
          */
-        id: string;
+        limit?: number;
+        /**
+         * Offset
+         */
+        offset?: number;
     };
-    query?: never;
-    url: '/monitoring-sources/{id}';
+    url: '/monitoring-sources/user';
 };
 
-export type DeleteMonitoringSourceErrors = {
+export type GetMonitoringSourcesByUserErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type DeleteMonitoringSourceError = DeleteMonitoringSourceErrors[keyof DeleteMonitoringSourceErrors];
+export type GetMonitoringSourcesByUserError = GetMonitoringSourcesByUserErrors[keyof GetMonitoringSourcesByUserErrors];
 
-export type DeleteMonitoringSourceResponses = {
+export type GetMonitoringSourcesByUserResponses = {
     /**
+     * Response Get Monitoring Sources By User
+     *
      * Successful Response
      */
-    204: void;
+    200: Array<MonitoringSource>;
 };
 
-export type DeleteMonitoringSourceResponse = DeleteMonitoringSourceResponses[keyof DeleteMonitoringSourceResponses];
-
-export type GetMonitoringSourceData = {
-    body?: never;
-    headers?: {
-        /**
-         * Authorization
-         */
-        authorization?: string | null;
-    };
-    path: {
-        /**
-         * Id
-         *
-         * The ArangoDB Document ID (e.g., collection/123)
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/monitoring-sources/{id}';
-};
-
-export type GetMonitoringSourceErrors = {
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type GetMonitoringSourceError = GetMonitoringSourceErrors[keyof GetMonitoringSourceErrors];
-
-export type GetMonitoringSourceResponses = {
-    /**
-     * Successful Response
-     */
-    200: MonitoringSource;
-};
-
-export type GetMonitoringSourceResponse = GetMonitoringSourceResponses[keyof GetMonitoringSourceResponses];
-
-export type UpdateMonitoringSourceData = {
-    body: MonitoringSourceMainData;
-    headers?: {
-        /**
-         * Authorization
-         */
-        authorization?: string | null;
-    };
-    path: {
-        /**
-         * Id
-         *
-         * The ArangoDB Document ID (e.g., collection/123)
-         */
-        id: string;
-    };
-    query?: never;
-    url: '/monitoring-sources/{id}';
-};
-
-export type UpdateMonitoringSourceErrors = {
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type UpdateMonitoringSourceError = UpdateMonitoringSourceErrors[keyof UpdateMonitoringSourceErrors];
-
-export type UpdateMonitoringSourceResponses = {
-    /**
-     * Successful Response
-     */
-    200: MonitoringSource;
-};
-
-export type UpdateMonitoringSourceResponse = UpdateMonitoringSourceResponses[keyof UpdateMonitoringSourceResponses];
+export type GetMonitoringSourcesByUserResponse = GetMonitoringSourcesByUserResponses[keyof GetMonitoringSourcesByUserResponses];
 
 export type DeleteMonitorTriggerData = {
     body?: never;
